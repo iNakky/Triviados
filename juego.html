@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/estilos.css" />
+    <title>Triviados!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="cabecera">
+      <img src="assets/img/logoTipoTest.png" alt="logo" />
+      <h1>Bienvenido a Triviados!</h1>
+    </div>
+
+    <h2 style="text-align: center;">Juego de preguntas tipo Test</h2>
+
+    <form id="formTest">
+      <div id="contenedorPregunta"></div>
+      <h3 id="error"></h3>
+      <button type="submit" id="btn">Siguiente</button>
+    </form>
+
+    <h3 id="resultado"></h3>
+
+    <div class="tablasFinales">
+      <div id="tablaRes"></div>
+      <div id="tablaUser"></div>
+    </div>
+
+
+    <script src="js/juegos.js"></script>
+    <script src="js/object.js"></script>
+    <script src="js/cookie.js"></script>
+  </body>
+</html>

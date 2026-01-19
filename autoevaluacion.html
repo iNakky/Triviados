@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Autoevaluación</title>
+</head>
+<body>
+    <div class="cabecera">
+        <img src="assets/img/logoTipoTest.png" alt="logo">
+        <h1>Que te ha parecido?</h1>
+    </div>
+
+    <section id="evaluation" class="sectionContainer">
+       <h2>Formulario de Autoevaluación</h2>
+       <form id="evaluation">
+        <div class="formGroup">
+            <label for="name">Nombre: </label>
+            <input type="text" id="name" class="name">
+        </div>
+        <div class="formGroup">
+            <label for="email">Email: </label>
+            <input type="email" id="email" class="email">
+        </div>
+        <div class="formGroup">
+            <label for="genre">Género: </label>
+            <select name="choosenGenre" id="genre">
+                <option value="">--Seleccione una opción--</option>
+                <option value="woman">Mujer</option>
+                <option value="man">Hombre</option>
+            </select>
+        </div>
+        <div class="formGroup">
+            <label for="satisfaction">Grado de satisfacción con el juego: </label>
+            <input type="number" min="1" max="10" id="satisfaction">
+        </div>
+        <div class="formGroup">
+            <label for="comments">Comentarios o Sugerencias: </label>
+            <textarea name="comments" id="comments" placeholder="Escríbanos aqui sus sugerencias..." style="resize: none;"></textarea>
+        </div>
+
+         <button type="submit" id="sendBtn">Enviar</button>
+        <button type="reset" id="resetBtn">Limpiar</button>
+       </form>
+
+       <div id="results" style="display: none;">
+            <h3>Resultados de tu evaluación</h3>
+            <div id="resultsContent"></div>
+       </div>
+    </section>
+
+    <button class="volver" id="btnAE"><a href="juego.html">Volver al Juego</a></button>
+
+
+    <script src="js/formulario.js"></script>
+    <script src="js/cookie.js"></script>
+</body>
+</html>
