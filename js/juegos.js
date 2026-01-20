@@ -126,7 +126,7 @@ function mostrarPregunta() {
 
   contador.setAttribute("class", "contPregunta");
   console.log("Atributo de contador: " + contador.getAttribute("class"));
-  contenedor.appendChild(contador);
+contenedor.appendChild(contador);
 }
 
 mostrarPregunta();
@@ -134,7 +134,17 @@ mostrarPregunta();
 // -------------------------------
 //   VALIDACIÓN Y SIGUIENTE
 // -------------------------------
+//Nuevo RA6 - Bloque A Alba
+let bien = 0;
+let mal = 0;
 
+const contadorMB = document.createElement("p");
+contadorMB.id = "contadorGlobal";
+contadorMB.textContent = `Aciertos: ${bien} | Fallos: ${mal}`;
+
+const form = document.getElementById("formTest");
+form.parentNode.insertBefore(contadorMB, form);
+//
 document.getElementById("formTest").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -157,34 +167,38 @@ document.getElementById("formTest").addEventListener("submit", function (e) {
 
     if (respuestaMarcada[i].checked) {
       if (marcada.value === preguntas[indice].correcta) {
+        bien++;
         labelM.style.color = "green";
         $(".pregunta").css("border", "3px solid green");
-        
       } else {
+        mal++;
         labelM.style.color = "red";
         $(".pregunta").css("border", "3px solid red");
       }
+
+      contadorMB.textContent = `Aciertos: ${bien} | Fallos: ${mal}`;
     } else {
       labelM.style.color = "black";
     }
     labels[i].style.fontWeight = "bold";
   }
-
   error.textContent = "";
 
   setTimeout(() => {
     const contador = document.querySelector(".contPregunta");
 
+  //Nuevo RA6 - Bloque A Alba
     if (contador) {
       console.log("Eliminando contador" + contador);
       contenedor.removeChild(contador);
     }
-
+  //
     $(".pregunta").css("border", "none");
 
     indice++;
 
     if (indice >= preguntas.length) {
+      contadorMB.parentNode.removeChild(contadorMB);  //Nuevo RA6 - Bloque A Alba
       let validador = new Validator(res);
       let gridAnswers = validador.answerGridSenderV2();
       let userAnswersGrind = validador.userAnswerGridSender();
@@ -229,7 +243,7 @@ document.getElementById("formTest").addEventListener("submit", function (e) {
                 </table>
                 `;
 
-   //BOTONDE REINICIO + Nuevo RA6 Bloque B - Modelo avanzado de eventos - Larisa
+      //BOTONDE REINICIO + Nuevo RA6 Bloque B - Modelo avanzado de eventos - Larisa
       const boton = document.getElementById("btn");
       boton.textContent = "🔄 Jugar de Nuevo";
       boton.type = "button";
