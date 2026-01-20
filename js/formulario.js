@@ -1,6 +1,15 @@
 window.addEventListener('load', function(){
     console.log('Formulario cargado');
     inicializarFormulario();
+
+     /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
+     const h2 = document.getElementById('formH2')
+     const textoOriginal = h2.textContent;
+
+     h2.textContent = textoOriginal + '✅'
+     setTimeout(function(){
+        h2.textContent = textoOriginal;
+     }, 1000)
 });
 
 function inicializarFormulario(){
@@ -72,34 +81,10 @@ function inicializarFormulario(){
         }
     });
 
-    //Nuevo - RA6 - Bloque B - Control del flujo de eventos -> con console.log - Larisa
-    emailInput.addEventListener('keydown', function(event){
-        event.stopPropagation()
-        console.log('Tecla detectada SOLO en email: ' + event.key)
-    })
-
     commentsTextarea.addEventListener('blur', function(event){
         event.target.style.borderColor = '';
     });
 
-    // Evento keydown global - Nuevo RA6 - Bloque B - Uso del evento Event -> con console.log - Larisa
-    document.addEventListener('keydown', function(event){
-        console.log('Tecla presionada: ' + event.key);
-        console.log('Type : ' + event.type);
-        console.log('KeyCode : ' + event.keyCode);
-
-        //Detectar teclas especiales :
-        if(event.key === 'Enter'){
-            console.log('Tecla ENTER detectada')
-        }
-        if(event.key === 'Shift'){
-            console.log('Tecla SHIFT detectada')
-        }
-        if(event.ctrlKey){
-            console.log('CTRL esta pulsado')
-        }
-
-    });
 
     // Botones (corregidos con # para IDs)
     const submitBtn = form.querySelector('#sendBtn');
@@ -129,6 +114,10 @@ function inicializarFormulario(){
         }else{
             alert('Corrija los errores del formulario.');
         }
+
+        /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
+        const mensajeCorrecto = document.getElementById('enviadoResetCorrecto');
+        mensajeCorrecto.textContent += ' Formulario enviado correctamente'
     });
 
     // Reset - Opción A: limpieza completa
@@ -137,6 +126,97 @@ function inicializarFormulario(){
             limpiarValidaciones();
             document.getElementById('results').style.display = 'none';
         }, 0);
+
+        /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
+        const mensajeCorrecto = document.getElementById('enviadoResetCorrecto');
+        mensajeCorrecto.textContent += ' Formulario reseteado correctamente'
+    });
+
+    /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
+
+    form.addEventListener('reset', function(event) {
+
+    });  
+
+    nameInput.addEventListener('mouseenter', function(event){
+        event.target.style.borderColor = 'lightblue';
+    });
+
+    nameInput.addEventListener('mouseover', function(event){
+        setTimeout(() => {
+            event.target.style.borderColor = '#ddd';
+        }, 1000);
+    });
+
+    emailInput.addEventListener('mouseover', function(event){
+        setTimeout(() => {
+            event.target.style.borderColor = "#ddd"
+        }, 1000);
+        event.target.style.borderColor = "lightblue";
+    });
+
+    genreSelect.addEventListener('mouseover', function(event){
+        setTimeout(() => {
+            event.target.style.borderColor = "#ddd"
+        }, 1000);
+        event.target.style.borderColor = "lightblue";
+    });
+
+    satisfactionInput.addEventListener('mouseover', function(event){
+        setTimeout(() => {
+            event.target.style.borderColor = "#ddd"
+        }, 1000);
+        event.target.style.borderColor = "lightblue";
+    });
+
+    commentsTextarea.addEventListener('mouseover', function(event){
+        setTimeout(() => {
+            event.target.style.borderColor = "#ddd"
+        }, 1000);
+        event.target.style.borderColor = "lightblue";
+    });
+    
+    //Nuevo - RA6 - Bloque B - Eventos obligatorios - Larisa
+
+    emailInput.addEventListener('keypress', function(event){
+        if (event.key === '*') {
+            const errorSpan = document.getElementById('emailError');
+
+            event.preventDefault(); // CLAVE
+            event.target.style.borderColor = 'red';
+
+            if (!errorSpan.textContent.includes('SIN asteriscos')) {
+                errorSpan.textContent += ' SIN asteriscos';
+            }
+
+            errorSpan.style.display = 'block';
+        }
+    });
+
+    //Nuevo - RA6 - Bloque B - Control del flujo de eventos -> con console.log - Larisa
+    emailInput.addEventListener('keydown', function(event){
+        event.stopPropagation()
+        console.log('Tecla detectada SOLO en email: ' + event.key)
+    })
+    /**--nuevo---- */
+
+    // Evento keydown global - Nuevo RA6 - Bloque B - Uso del evento Event -> con console.log - Larisa
+    document.addEventListener('keydown', function(event){
+        console.log('Tecla presionada: ' + event.key);
+        console.log('Type : ' + event.type);
+        console.log('KeyCode : ' + event.keyCode);
+
+        //Detectar teclas especiales :
+        if(event.key === 'Enter'){
+            event.target.style.borderColor = 'purple';
+        }
+        if(event.key === 'Shift'){
+            event.target.style.borderColor = 'pink';
+        }
+        if(event.ctrlKey){
+            event.target.style.borderColor = 'black';
+        }
+
     });
 }
 
@@ -296,7 +376,9 @@ function procesarForm(){
 
     resultsDiv.style.display = 'block';
 
-    alert('Formulario enviado correctamente.');
+    /* ANTES: */
+    /*alert('Formulario enviado correctamente.');*/
+
 }
 
 function limpiarValidaciones(){

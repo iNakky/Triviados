@@ -426,6 +426,12 @@ td {
   box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
 }
 
+#enviadoResetCorrecto{
+  color: grey;
+  text-align: center;
+  padding-top: 5%;
+}
+
 #results {
   max-width: 500px;
   margin-top: 30px;
