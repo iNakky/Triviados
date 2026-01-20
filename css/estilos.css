@@ -101,14 +101,16 @@ h3 {
 
 /*CSS JUEGO*/
 #contenedorPregunta {
-  display: flex;
+  display:flex;
   justify-content: center;
   margin-top: 40px;
+  gap:20px;
 }
 
 .pregunta {
-  width: 100%;
-  max-width: 520px;
+  margin-left:16%;
+  width: 50%;
+  height: 30%;
   padding: 30px;
   border-radius: 22px;
   border-color: #e5941a;
@@ -190,7 +192,7 @@ h3 {
   box-shadow: 0 12px 30px rgba(249, 115, 22, 0.35);
   text-align: center;
   margin-left: 40%;
-  margin-top: 1%;
+  font-weight: bold;
 }
 
 #btnAE {
@@ -443,14 +445,34 @@ td {
 }
 
 .contPregunta{
-  margin-left:20px;
-  height: 40px;
+  margin-bottom: 18%;
+  width: 15%;
   padding:15px;
   border-radius: 15px;
   border-color: #e5941a;
   background: radial-gradient(circle at top, #93979c, #fbfbfb);
   box-shadow: 0 12px 30px rgba(18, 8, 1, 0.35);
   font-weight: bold;
+  font-family: "MeatBall", sans-serif;
+font-size:25px;
 }
+
+#contadorGlobal{
+  font-size:20px;
+  font-family: "MeatBall", sans-serif;
+  margin: 0 auto;
+  text-align: center;
+border-color: #e5941a;
+  background: radial-gradient(circle at top, #93979c, #fbfbfb);
+  box-shadow: 0 12px 30px rgba(18, 8, 1, 0.35);
+  font-weight: bold;
+  width: 30%;
+  padding:10px;
+  border-radius: 15px;
+}
+
+
+
+
 
 
