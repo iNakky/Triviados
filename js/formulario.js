@@ -17,7 +17,7 @@ function inicializarFormulario(){
     nameInput.addEventListener('input', function(event){
         validarNombre(event.target);
         console.log("Evento target: " + event.target)
-        console.log("Evento detectado: " + event.type)
+        console.log("Evento type: " + event.type)
     });
 
     emailInput.addEventListener('input', function(event){
@@ -72,13 +72,33 @@ function inicializarFormulario(){
         }
     });
 
+    //Nuevo - RA6 - Bloque B - Control del flujo de eventos -> con console.log - Larisa
+    emailInput.addEventListener('keydown', function(event){
+        event.stopPropagation()
+        console.log('Tecla detectada SOLO en email: ' + event.key)
+    })
+
     commentsTextarea.addEventListener('blur', function(event){
         event.target.style.borderColor = '';
     });
 
-    // Evento keydown global
+    // Evento keydown global - Nuevo RA6 - Bloque B - Uso del evento Event -> con console.log - Larisa
     document.addEventListener('keydown', function(event){
         console.log('Tecla presionada: ' + event.key);
+        console.log('Type : ' + event.type);
+        console.log('KeyCode : ' + event.keyCode);
+
+        //Detectar teclas especiales :
+        if(event.key === 'Enter'){
+            console.log('Tecla ENTER detectada')
+        }
+        if(event.key === 'Shift'){
+            console.log('Tecla SHIFT detectada')
+        }
+        if(event.ctrlKey){
+            console.log('CTRL esta pulsado')
+        }
+
     });
 
     // Botones (corregidos con # para IDs)

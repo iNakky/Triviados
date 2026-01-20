@@ -230,12 +230,30 @@ document.getElementById("formTest").addEventListener("submit", function (e) {
                 `;
 
    //BOTONDE REINICIO + Nuevo RA6 Bloque B - Modelo avanzado de eventos - Larisa
+
+   /*
+   CODIGO ANTERIOR
       const boton = document.getElementById("btn");
       boton.textContent = "🔄 Jugar de Nuevo";
       boton.type = "button";
       boton.onclick = function () {
         location.reload();
-      };
+      };*/
+
+      /*CODIGO NUEVO*/
+      const boton = document.getElementById("btn")
+      boton.textContent = "🔄 Jugar de Nuevo"
+      boton.type = "button"
+
+      function reiniciarJuego(){
+        location.reload()
+      }
+
+      //eventos add y remove EventListener
+      boton.addEventListener("click", reiniciarJuego)
+      boton.removeEventListener("click", reiniciarJuego)
+      /**/
+
 
       const botonRedirigir = document.createElement("button");
       botonRedirigir.textContent = "📈Autoevaluación";
