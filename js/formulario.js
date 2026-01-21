@@ -1,16 +1,46 @@
-window.addEventListener('load', function(){
+// window.addEventListener('load', function(){
+//     console.log('Formulario cargado');
+//     console.log("asd")
+//     inicializarFormulario();
+
+//      /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
+//      const h2 = document.getElementById('formH2')
+//      const textoOriginal = h2.textContent;
+
+//      h2.textContent = textoOriginal + '✅'
+//      setTimeout(function(){
+//         h2.textContent = textoOriginal;
+//      }, 1000)
+// });
+
+window.onload = function() {
     console.log('Formulario cargado');
-    inicializarFormulario();
+    
+    if (window.addEventListener) {
+        inicializarFormulario();          // Navegadores modernos
+        /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
+        const h2 = document.getElementById('formH2')
+        const textoOriginal = h2.textContent;
 
-     /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
-     const h2 = document.getElementById('formH2')
-     const textoOriginal = h2.textContent;
+        h2.textContent = textoOriginal + '✅'
+        setTimeout(function(){
+            h2.textContent = textoOriginal;
+        }, 1000)
+    } else if (window.attachEvent) {
+        /* Nuevo RA6 - Bloque C - Eventos Cross-Browser - Izan */
+        inicializarFormularioIE();        // IE8 o inferior
+        var h2 = document.getElementById('formH2');
+        var textoOriginal = h2.innerText;
 
-     h2.textContent = textoOriginal + '✅'
-     setTimeout(function(){
-        h2.textContent = textoOriginal;
-     }, 1000)
-});
+        h2.innerText = textoOriginal + ' OK';
+
+        setTimeout(function () {
+            h2.innerText = textoOriginal;
+        }, 1000);
+    }
+
+    
+}
 
 function inicializarFormulario(){
     const form = document.getElementById('evaluation');
@@ -108,16 +138,24 @@ function inicializarFormulario(){
         const emailValido = validarEmail(emailInput);
         const generoValido = validarGenero(genreSelect);
         const satisfaccionValido = validarSatisfaccion(satisfactionInput);
+        const mensajeCorrecto = document.getElementById('enviadoResetCorrecto');
 
         if(nombreValido && emailValido && generoValido && satisfaccionValido){
             procesarForm();
         }else{
-            alert('Corrija los errores del formulario.');
+            // alert('Corrija los errores del formulario.');
         }
 
         /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
-        const mensajeCorrecto = document.getElementById('enviadoResetCorrecto');
-        mensajeCorrecto.textContent += ' Formulario enviado correctamente'
+        if(!document.getElementById('emailError').textContent && !document.getElementById('nameError').textContent  && !document.getElementById('genreError').textContent  && !document.getElementById('satisfactionError').textContent ){
+            
+            mensajeCorrecto.textContent = ''
+            mensajeCorrecto.textContent += ' Formulario enviado correctamente'
+        }else{
+            mensajeCorrecto.textContent = 'Corrija los errores del formulario.'
+        }
+        
+        
     });
 
     // Reset - Opción A: limpieza completa
@@ -129,6 +167,7 @@ function inicializarFormulario(){
 
         /* Nuevo RA6 - Bloque B - Eventos obligatorios - Larisa */
         const mensajeCorrecto = document.getElementById('enviadoResetCorrecto');
+        mensajeCorrecto.textContent = ''
         mensajeCorrecto.textContent += ' Formulario reseteado correctamente'
     });
 
@@ -231,6 +270,7 @@ function validarNombre(campo){
         return false;
     } else{
         errorSpan.style.display = 'none';
+        errorSpan.textContent = ""
         campo.style.borderColor = 'green';
         return true;
     }
@@ -254,6 +294,7 @@ function validarEmail(campo){
         return false;
     } else{
         errorSpan.style.display = 'none';
+        errorSpan.textContent = ""
         campo.style.borderColor = 'green';
         return true;
     }
@@ -270,6 +311,7 @@ function validarGenero(campo){
         return false;
     } else{
         errorSpan.style.display = 'none';
+        errorSpan.textContent = ""
         campo.style.borderColor = 'green';
         return true;
     }
@@ -298,6 +340,7 @@ function validarSatisfaccion(campo){
         return false;
     } else{
         errorSpan.style.display = 'none';
+        errorSpan.textContent = ""
         campo.style.borderColor = 'green';
         return true;
     }
@@ -397,4 +440,70 @@ function limpiarValidaciones(){
     if(contador){
         contador.textContent = 'Caracteres: 0';
     }
+}
+
+/* Nuevo RA6 - Bloque C - Eventos Cross-Browser Comprobacion de campos - Izan */
+function inicializarFormularioIE() {
+    var form = document.getElementById('evaluation');
+    var nameInput = document.getElementById('name');
+    var emailInput = document.getElementById('email');
+
+    crearElementosValidacion(); // esta función sí funciona en IE8
+
+    // INPUT / KEYUP
+    nameInput.attachEvent('onkeyup', function () {
+        validarNombre(nameInput);
+    });
+
+    emailInput.attachEvent('onkeyup', function () {
+        validarEmail(emailInput);
+    });
+
+    // FOCUS / BLUR
+    nameInput.attachEvent('onfocus', function () {
+        nameInput.style.borderColor = 'blue';
+    });
+
+    nameInput.attachEvent('onblur', function () {
+        nameInput.style.borderColor = '';
+        validarNombre(nameInput);
+    });
+
+    emailInput.attachEvent('onfocus', function () {
+        emailInput.style.borderColor = 'blue';
+    });
+
+    emailInput.attachEvent('onblur', function () {
+        emailInput.style.borderColor = '';
+        validarEmail(emailInput);
+    });
+
+    // SUBMIT
+    form.attachEvent('onsubmit', function () {
+        var okNombre = validarNombre(nameInput);
+        var okEmail = validarEmail(emailInput);
+
+        if (!okNombre || !okEmail) {
+            alert('Corrija los errores del formulario');
+            window.event.returnValue = false; // preventDefault IE
+        }
+    });
+
+    // KEYDOWN
+    emailInput.attachEvent('onkeydown', function () {
+        var e = window.event;
+
+        if (e.keyCode === 106) { // *
+            e.returnValue = false;
+            emailInput.style.borderColor = 'red';
+        }
+
+        e.cancelBubble = true;
+    });
+
+    // EVENTO GLOBAL
+    document.attachEvent('onkeydown', function () {
+        var e = window.event;
+        console.log('KeyCode: ' + e.keyCode);
+    });
 }
