@@ -275,8 +275,9 @@ function JuegoIE9(){
         }
 
         //eventos add y remove EventListener
-        boton.addEventListener("click", reiniciarJuego)
         boton.removeEventListener("click", reiniciarJuego)
+        boton.addEventListener("click", reiniciarJuego)
+        
         /**/
 
 
